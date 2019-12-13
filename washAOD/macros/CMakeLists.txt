@@ -110,11 +110,11 @@ add_custom_command(TARGET macroRun POST_BUILD
                    "${CMAKE_CURRENT_SOURCE_DIR}/TSelectors/mainAnalysisSelectorDict.cxx"
                    $<TARGET_FILE_DIR:macroRun>
                    )
-add_custom_command(TARGET macroRun POST_BUILD
-                   COMMAND ${CMAKE_COMMAND} -E copy_if_different
-                   "${CMAKE_CURRENT_SOURCE_DIR}/TSelectors/mainAnalysisSelectorDict_rdict.pcm"
-                   $<TARGET_FILE_DIR:macroRun>
-                   )
+#add_custom_command(TARGET macroRun POST_BUILD
+#                   COMMAND ${CMAKE_COMMAND} -E copy_if_different
+#                   "${CMAKE_CURRENT_SOURCE_DIR}/TSelectors/mainAnalysisSelectorDict_rdict.pcm"
+#                   $<TARGET_FILE_DIR:macroRun>
+#                   )
 
 install (TARGETS macroRun DESTINATION "${CMAKE_SOURCE_DIR}/bin")
 foreach (macro_lib ${macro_libs})

@@ -182,8 +182,8 @@ Bool_t RDFAnalysis::Process(TChain * chain) {
    };
    auto calcHemVeto = [&](bool hem_veto) { 
 	if (year_ == 2018) {
-		if (hem_veto ==0){return false;}
-		else {return true;}
+		if (hem_veto ==0){return true;}
+		else {return false;}
 	}
 	else {return true;}
    };
