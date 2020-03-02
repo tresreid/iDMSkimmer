@@ -57,6 +57,39 @@ void recoEffiForMuTrack::beginJob()
     muTrackT_->Branch("recoDz",  &recoDz_);
 //    muTrackT_->Branch("recoVxy", &recoVxy_);
 //    muTrackT_->Branch("recoVz",  &recoVz_);
+//    muTrackT->Branch("reco_dsa_pt",  &recoDSAPt_);
+    
+//    muTrackT->Branch("reco_dsa_pt_error",  &recoDSAPtError_);
+//    muTrackT->Branch("reco_dsa_eta", &recoDSAEta_);
+//    muTrackT->Branch("reco_dsa_phi", &recoDSAPhi_);
+//    muTrackT->Branch("reco_dsa_dxy", &recoDSADxy_);
+//    muTrackT->Branch("reco_dsa_dxy_error", &recoDSADxyError_);
+//    muTrackT->Branch("reco_dsa_dz",  &recoDSADz_);
+//    muTrackT->Branch("reco_dsa_dz_error",  &recoDSADzError_);
+//    muTrackT->Branch("reco_dsa_charge", &recoDSACharge_);
+//    muTrackT->Branch("reco_dsa_trk_chi2", &recoDSATrkChi2_);
+//    muTrackT->Branch("reco_dsa_trk_n_planes", &recoDSATrkNumPlanes_);
+//    muTrackT->Branch("reco_dsa_trk_n_hits", &recoDSATrkNumHits_);
+//    muTrackT->Branch("reco_dsa_trk_n_DT_hits", &recoDSATrkNumDTHits_);
+//    muTrackT->Branch("reco_dsa_trk_n_CSC_hits", &recoDSATrkNumCSCHits_);
+//    muTrackT->Branch("reco_dsa_idx0", &recoDSAIdx0_);
+//    muTrackT->Branch("reco_dsa_idx1", &recoDSAIdx1_);  recoT->Branch("reco_dsa_pt",  &recoDSAPt_);
+//    muTrackT->Branch("reco_dsa_pt_error",  &recoDSAPtError_);
+//    muTrackT->Branch("reco_dsa_eta", &recoDSAEta_);
+//    muTrackT->Branch("reco_dsa_phi", &recoDSAPhi_);
+//    muTrackT->Branch("reco_dsa_dxy", &recoDSADxy_);
+//    muTrackT->Branch("reco_dsa_dxy_error", &recoDSADxyError_);
+//    muTrackT->Branch("reco_dsa_dz",  &recoDSADz_);
+//    muTrackT->Branch("reco_dsa_dz_error",  &recoDSADzError_);
+//    muTrackT->Branch("reco_dsa_charge", &recoDSACharge_);
+//    muTrackT->Branch("reco_dsa_trk_chi2", &recoDSATrkChi2_);
+//    muTrackT->Branch("reco_dsa_trk_n_planes", &recoDSATrkNumPlanes_);
+//    muTrackT->Branch("reco_dsa_trk_n_hits", &recoDSATrkNumHits_);
+//    muTrackT->Branch("reco_dsa_trk_n_DT_hits", &recoDSATrkNumDTHits_);
+//    muTrackT->Branch("reco_dsa_trk_n_CSC_hits", &recoDSATrkNumCSCHits_);
+//    muTrackT->Branch("reco_dsa_idx0", &recoDSAIdx0_);
+//    muTrackT->Branch("reco_dsa_idx1", &recoDSAIdx1_);
+
     muTrackT_->Branch("deltaR",  &deltaR_);
     muTrackT_->Branch("genJetPt", &genJetPt_, "genJetPt/F");
     muTrackT_->Branch("genJetEta", &genJetEta_, "genJetEta/F");
@@ -137,6 +170,22 @@ void recoEffiForMuTrack::analyze(const edm::Event& iEvent, const edm::EventSetup
     recoVxy_.clear(); recoVxy_.reserve(2);
     recoVz_ .clear(); recoVz_ .reserve(2);
     deltaR_ .clear(); deltaR_ .reserve(2);
+//    recoDSAPt_.clear();
+//    recoDSAPtError_.clear();
+//    recoDSAEta_.clear();
+//    recoDSAPhi_.clear();
+//    recoDSADxy_.clear();
+//    recoDSADxyError_.clear();
+//    recoDSADz_.clear();
+//    recoDSADzError_.clear();
+//    recoDSACharge_.clear();
+//    recoDSATrkChi2_.clear();
+//    recoDSATrkNumPlanes_.clear();
+//    recoDSATrkNumHits_.clear();
+//    recoDSATrkNumDTHits_.clear();
+//    recoDSATrkNumCSCHits_.clear();
+//    recoDSAIdx0_ = -9999;
+//    recoDSAIdx1_ = -9999;
 
     // MC match
     vector<int> genMuIdx{};

@@ -393,7 +393,7 @@ bool iDMAnalyzer::getCollections(const edm::Event& iEvent) {
     triggerPathsWithoutVersionNum_.emplace_back("HLT_DoubleMu3_DZ_PFMET50_PFMHT60_v10");
     triggerPathsWithoutVersionNum_.emplace_back("HLT_DoubleMu3_DZ_PFMET70_PFMHT70_v10");
     triggerPathsWithoutVersionNum_.emplace_back("HLT_DoubleMu3_DZ_PFMET90_PFMHT90_v10");
-    const std::vector<std::string>& pathNames = hltConfig_.triggerNames();
+    //const std::vector<std::string>& pathNames = hltConfig_.triggerNames();
     
 
     for (auto trigPathNoVersion : triggerPathsWithoutVersionNum_) {

@@ -31,10 +31,12 @@ odir = "/uscmst1b_scratch/lpc1/3DayLifetime/mireid/v4"
 makedir = subprocess.Popen("mkdir %s"%odir,shell=True,stdout=subprocess.PIPE)
 makedir.wait()
 #analyzer ='MetTrigSelfEffiForMuTrack_cfg.py'
-analyzer ='iDMAnalyzer_cfg.py'
+#analyzer ='iDMAnalyzer_cfg.py'
+analyzer ='TrackQuality_cfg.py'
 #analyzer='MuRecoEffi_cfg.py'
 analyzer_name = {'MetTrigSelfEffiForMuTrack_cfg.py': 'MetTrigStudy_signal_gen_v8',
 		'iDMAnalyzer_cfg.py': 'iDMAnalysis_seventhrunv2',
+		'TrackQuality_cfg.py': 'TrackQuality',
 		'MuRecoEffi_cfg.py': 'MuRecoEffi'}
 for mass in masslist:
 	for life in lifelist:	
@@ -44,8 +46,10 @@ for mass in masslist:
 			#cmdxx = "cmsRun ../python/{1} year=2018 inputFiles=/store/mc/RunIIAutumn18DRPremix/WJetsToLNu_HT-400To600_TuneCP5_13TeV-madgraphMLM-pythia8/AODSIM/102X_upgrade2018_realistic_v15-v1/90000/E2ECFFD9-B0C9-E04A-99A4-31BB259AAD98.root outputFile=test_2018".format(ofile,analyzer)#,mass,life)
 			#cmdxx = "cmsRun ../python/{1} year=2018 inputFiles=/store/mc/RunIIAutumn18DRPremix/ZZ_TuneCP5_13TeV-pythia8/AODSIM/102X_upgrade2018_realistic_v15-v2/80000/FD02DD57-1A67-A049-872F-6627567DA620.root outputFile=test_2018".format(ofile,analyzer)#,mass,life)
 			#cmdxx = "cmsRun ../python/{1} year=2017 inputFiles=/store/mc/RunIIFall17DRPremix/WW_TuneCP5_13TeV-pythia8/AODSIM/PU2017_94X_mc2017_realistic_v11-v1/1110000/F216796B-8BD3-E811-816F-008CFA197AEC.root outputFile=test_2017".format(ofile,analyzer)#,mass,life)
-			cmdxx = "cmsRun ../python/{1} year=2016 inputFiles=/store/mc/RunIISummer16DR80Premix/WJetsToLNu_HT-200To400_TuneCUETP8M1_13TeV-madgraphMLM-pythia8/AODSIM/PUMoriond17_80X_mcRun2_asymptotic_2016_TrancheIV_v6_ext2-v1/80000/BAAB4424-B6C9-E611-A731-901B0E5427B6.root outputFile=test_2016".format(ofile,analyzer)#,mass,life)
+			#cmdxx = "cmsRun ../python/{1} year=2016 inputFiles=/store/mc/RunIISummer16DR80Premix/WJetsToLNu_HT-200To400_TuneCUETP8M1_13TeV-madgraphMLM-pythia8/AODSIM/PUMoriond17_80X_mcRun2_asymptotic_2016_TrancheIV_v6_ext2-v1/80000/BAAB4424-B6C9-E611-A731-901B0E5427B6.root outputFile=test_2016".format(ofile,analyzer)#,mass,life)
 			#cmdxx = "cmsRun ../python/{1} year=2018 inputFiles=/store/data/Run2018A/SingleMuon/AOD/17Sep2018-v2/90000/F8382E90-9BC4-4E4A-8EB2-952904BAE395.root outputFile=test_{0}".format(ofile,analyzer)#,mass,life)
+			cmdxx = "cmsRun ../python/{1} year=2018 inputFiles_load=test.txt outputFile=test_2018".format(ofile,analyzer)#,mass,life)
+			#cmdxx = "cmsRun ../python/{1} year=2018 inputFiles_load=root://cmseos.fnal.gov//store/group/lpcmetx/iDM/Ntuples/2018/signal/iDMAnalysis_seventhrun/Mchi-52p5_dMchi-5p0_ctau-100/iDMAnalysis_Mchi-52p5_dMchi-5p0_ctau-100.root".format(ofile,analyzer)#,mass,life)
 			#cmdxx = "cmsRun ../python/{1} year=2018 inputFiles_load=../data/iDM/2018/signal/test.list outputFile=test_{0}".format(ofile,analyzer)#,mass,life)
 		
 			print(cmdxx)

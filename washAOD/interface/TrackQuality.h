@@ -50,7 +50,7 @@ class TrackQuality :
         virtual void endJob() override;
 
         const edm::InputTag muTrackTag_;
-//        const edm::InputTag genParticleTag_;
+        const edm::InputTag genParticleTag_;
 //        const edm::InputTag genJetTag_;
 //        const edm::InputTag genMetTag_;
         const edm::InputTag recoMetTag_;
@@ -64,7 +64,7 @@ class TrackQuality :
 	const edm::InputTag beamHaloSummaryTag_;
 
         const edm::EDGetTokenT<reco::TrackCollection> muTrackToken_;
-//        const edm::EDGetTokenT<reco::GenParticleCollection> genParticleToken_;
+        const edm::EDGetTokenT<reco::GenParticleCollection> genParticleToken_;
 //        const edm::EDGetTokenT<reco::GenJetCollection> genJetToken_;
 //        const edm::EDGetTokenT<reco::GenMETCollection> genMetToken_;
         const edm::EDGetTokenT<reco::PFMETCollection> recoMetToken_;
@@ -77,7 +77,7 @@ class TrackQuality :
 
         edm::Service<TFileService> fs;
         edm::Handle<reco::TrackCollection> muTrackHandle_;
-//        edm::Handle<reco::GenParticleCollection> genParticleHandle_;
+        edm::Handle<reco::GenParticleCollection> genParticleHandle_;
 //        edm::Handle<reco::GenJetCollection> genJetHandle_;
 //        edm::Handle<reco::GenMETCollection> genMetHandle_;
         edm::Handle<reco::PFMETCollection> recoMetHandle_;
@@ -94,12 +94,12 @@ class TrackQuality :
         unsigned int fired_;
         //unsigned int nMatched_;
 
-//        std::vector<float> genPt_;
-//        std::vector<float> genEta_;
-//        std::vector<float> genPhi_;
-//        std::vector<float> genVxy_;
-//        std::vector<float> genVz_;
-        //std::vector<float> genDr_;
+        std::vector<float> genPt_;
+        std::vector<float> genEta_;
+        std::vector<float> genPhi_;
+        std::vector<float> genVxy_;
+        std::vector<float> genVz_;
+        std::vector<float> genDr_;
         std::vector<float> recoPt_;
         std::vector<float> recoEta_;
         std::vector<float> recoPhi_;
@@ -108,7 +108,7 @@ class TrackQuality :
         std::vector<float> recoVxy_;
         std::vector<float> recoVz_;
         std::vector<float> recoDr_;
-        //std::vector<float> deltaR_;
+        std::vector<float> deltaR_;
         //float genJetPt_;
         //float genLeadMetPt_;
         //float genSubLeadMetPt_;
@@ -129,8 +129,8 @@ class TrackQuality :
         std::vector<float> trackHits; // track quality info hits =12
         std::vector<float> trackChi2; // track quality info chi2 =10
         std::vector<bool> qualityTrack;// is the track good quality (above criteria)
-//        std::vector<bool> isGenMatched; // if the muon is gen matched dR<0.3
-//        std::vector<float> GenDR; // if the muon is gen matched dR<0.3
+        std::vector<bool> isGenMatched; // if the muon is gen matched dR<0.3
+        std::vector<float> GenDR; // if the muon is gen matched dR<0.3
         int event;
 
 	bool beamHaloHcal;

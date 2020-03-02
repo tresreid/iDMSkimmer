@@ -17,7 +17,7 @@
 
 TrackQuality::TrackQuality(const edm::ParameterSet& ps) :
     muTrackTag_(ps.getParameter<edm::InputTag>("muTrack")),
-//    genParticleTag_(ps.getParameter<edm::InputTag>("genParticle")),
+    genParticleTag_(ps.getParameter<edm::InputTag>("genParticle")),
 //    genJetTag_(ps.getParameter<edm::InputTag>("genJet")),
 //    genMetTag_(ps.getParameter<edm::InputTag>("genMet")),
     recoMetTag_(ps.getParameter<edm::InputTag>("recoMet")),
@@ -31,7 +31,7 @@ TrackQuality::TrackQuality(const edm::ParameterSet& ps) :
     beamHaloSummaryTag_(ps.getParameter<edm::InputTag>("beamHaloSummary")),
     
     muTrackToken_(consumes<reco::TrackCollection>(muTrackTag_)),
-//    genParticleToken_(consumes<reco::GenParticleCollection>(genParticleTag_)),
+    genParticleToken_(consumes<reco::GenParticleCollection>(genParticleTag_)),
 //    genJetToken_(consumes<reco::GenJetCollection>(genJetTag_)),
 //    genMetToken_(consumes<reco::GenMETCollection>(genMetTag_)),
     recoMetToken_(consumes<reco::PFMETCollection>(recoMetTag_)),
@@ -51,7 +51,7 @@ void TrackQuality::fillDescriptions(edm::ConfigurationDescriptions& descriptions
 {
     edm::ParameterSetDescription desc;
     desc.add<edm::InputTag>("muTrack", edm::InputTag("displacedStandAloneMuons"));
-//    desc.add<edm::InputTag>("genParticle", edm::InputTag("genParticles"));
+    desc.add<edm::InputTag>("genParticle", edm::InputTag("genParticles"));
 //    desc.add<edm::InputTag>("genJet", edm::InputTag("ak4GenJets"));
 //    desc.add<edm::InputTag>("genMet", edm::InputTag("genMetTrue"));
     desc.add<edm::InputTag>("recoMet", edm::InputTag("pfMet"));
@@ -79,11 +79,11 @@ void TrackQuality::beginJob()
 
     for (int i = 0; i < 1; i++) {
         cutsTree->Branch("fired", &fired_, "fired/i");
-//        cutsTree->Branch("genPt",  &genPt_);
-//        cutsTree->Branch("genEta", &genEta_);
-//        cutsTree->Branch("genPhi", &genPhi_);
-//        cutsTree->Branch("genVxy", &genVxy_);
-//        cutsTree->Branch("genVz",  &genVz_);
+        cutsTree->Branch("genPt",  &genPt_);
+        cutsTree->Branch("genEta", &genEta_);
+        cutsTree->Branch("genPhi", &genPhi_);
+        cutsTree->Branch("genVxy", &genVxy_);
+        cutsTree->Branch("genVz",  &genVz_);
         cutsTree->Branch("recoPt",  &recoPt_);
         cutsTree->Branch("recoEta", &recoEta_);
         cutsTree->Branch("recoPhi", &recoPhi_);
@@ -119,8 +119,8 @@ void TrackQuality::beginJob()
 	cutsTree->Branch("trackHits",&trackHits); // track quality info hits =12
 	cutsTree->Branch("trackChi2",&trackChi2); // track quality info chi2 =10
 	cutsTree->Branch("qualityTrack",&qualityTrack);// is the track good quality (above criteria)
-//	cutsTree->Branch("isGenMatched",&isGenMatched); // if the muon is gen matched dR<0.3
-//	cutsTree->Branch("GenDR",&GenDR); // if the muon is gen matched dR<0.3
+	cutsTree->Branch("isGenMatched",&isGenMatched); // if the muon is gen matched dR<0.3
+	cutsTree->Branch("GenDR",&GenDR); // if the muon is gen matched dR<0.3
 	cutsTree->Branch("event",&event); //event number
 
         //for (int j = 0; j < 6; j++) {
@@ -162,12 +162,12 @@ void TrackQuality::analyze(const edm::Event& iEvent, const edm::EventSetup& iSet
             << endl;
         return;
     }
-//    iEvent.getByToken(genParticleToken_, genParticleHandle_);
-//    if (!genParticleHandle_.isValid()) {
-//        LogVerbatim("TrackQuality") << "TrackQuality::analyze: Error in getting genParticle product from Event!"
-//            << endl;
-//        return;
-//    }
+    iEvent.getByToken(genParticleToken_, genParticleHandle_);
+    if (!genParticleHandle_.isValid()) {
+        LogVerbatim("TrackQuality") << "TrackQuality::analyze: Error in getting genParticle product from Event!"
+            << endl;
+        return;
+    }
 //    iEvent.getByToken(genJetToken_, genJetHandle_);
 //    if (!genJetHandle_.isValid()) {
 //        LogVerbatim("TrackQuality") << "TrackQuality::analyze: Error in getting genJet product from Event!" << endl;
@@ -223,11 +223,11 @@ void TrackQuality::analyze(const edm::Event& iEvent, const edm::EventSetup& iSet
 //    }
 
 
-//    genPt_ .clear();
-//    genEta_.clear();
-//    genPhi_.clear();
-//    genVxy_.clear();
-//    genVz_ .clear();
+    genPt_ .clear();
+    genEta_.clear();
+    genPhi_.clear();
+    genVxy_.clear();
+    genVz_ .clear();
     recoPt_ .clear();
     recoEta_.clear();
     recoPhi_.clear();
@@ -244,8 +244,8 @@ void TrackQuality::analyze(const edm::Event& iEvent, const edm::EventSetup& iSet
     trackHits.clear();
     trackChi2.clear();
     qualityTrack.clear();
-//    isGenMatched.clear();
-//    GenDR.clear();
+    isGenMatched.clear();
+    GenDR.clear();
 
     for (int i = 0; i < 6; i++)
         cutsVec[i] = 0;
@@ -388,78 +388,78 @@ void TrackQuality::analyze(const edm::Event& iEvent, const edm::EventSetup& iSet
         if(push_3){subleadingMuRef3 = reco::TrackRef(muTrackHandle_, subleadingMuIndex3);}
     
    
-//	float dR_matchl = 10000;
-//	float dR_matchs = 10000;
-//	float dR_matchs2 = 10000;
-//	float dR_matchs3 = 10000;
-//	int reverse =0;
-//	float gen_pt=0;
-//    for (size_t ig(0); ig!=genParticleHandle_->size(); ++ig) {
-//        reco::GenParticleRef gp(genParticleHandle_, ig); 
-//	if(abs(gp->pdgId())==13 && gp->isHardProcess()){
-//		if (gp->pt() > gen_pt){reverse++; gen_pt=gp->pt();}
-//		if(push_0){
-//		float dphi1 = gp->phi() - leadingMuRef->phi();
-//        	if (std::abs(dphi1) > 3.1415)
-//            		dphi1 -= 2 * 3.1415 * dphi1/std::abs(dphi1);	
-//		float deta1 = gp->eta() - leadingMuRef->eta();
-//		float dR_match_temp1 = sqrt(dphi1*dphi1 + deta1*deta1);
-//		if (dR_match_temp1 < dR_matchl){ dR_matchl = dR_match_temp1;}
-//		}
-//		if(push_1){
-//		float dphi2 = gp->phi() - subleadingMuRef->phi();
-//        	if (std::abs(dphi2) > 3.1415)
-//            		dphi2 -= 2 * 3.1415 * dphi2/std::abs(dphi2);	
-//		float deta2 = gp->eta() - subleadingMuRef->eta();
-//		float dR_match_temp2 = sqrt(dphi2*dphi2 + deta2*deta2);
-//		if (dR_match_temp2 < dR_matchs){ dR_matchs = dR_match_temp2;}
-//		}
-//		if(push_2){
-//		float dphi3 = gp->phi() - subleadingMuRef2->phi();
-//        	if (std::abs(dphi3) > 3.1415)
-//            		dphi3 -= 2 * 3.1415 * dphi3/std::abs(dphi3);	
-//		float deta3 = gp->eta() - subleadingMuRef2->eta();
-//		float dR_match_temp3 = sqrt(dphi3*dphi3 + deta3*deta3);
-//		if (dR_match_temp3 < dR_matchs2){ dR_matchs2 = dR_match_temp3;}
-//		}
-//		if(push_3){
-//		float dphi4 = gp->phi() - subleadingMuRef3->phi();
-//        	if (std::abs(dphi4) > 3.1415)
-//            		dphi4 -= 2 * 3.1415 * dphi4/std::abs(dphi4);	
-//		float deta4 = gp->eta() - subleadingMuRef3->eta();
-//		float dR_match_temp4 = sqrt(dphi4*dphi4 + deta4*deta4);
-//		if (dR_match_temp4 < dR_matchs3){ dR_matchs3 = dR_match_temp4;}
-//		}
-//		
-//        	genPt_ .push_back(gp->pt());
-// 	        genEta_.push_back(gp->eta());
-//       	 	genPhi_.push_back(gp->phi());
-//       	 	genVxy_.push_back(sqrt(gp->vx()*gp->vx() + gp->vy()*gp->vy()));
-//       		genVz_ .push_back(gp->vz());
-//		}	
-//	}
-//	if (reverse>1){
-//
-//        	std::reverse(genPt_.begin(), genPt_.end()); 
-// 	        std::reverse(genEta_.begin(),genEta_.end());
-//       	 	std::reverse(genPhi_.begin(),genPhi_.end());
-//       	 	std::reverse(genVxy_.begin(),genVxy_.end());
-//       		std::reverse(genVz_ .begin(),genVz_.end());
-//	}
-//	if(push_0){
-//	isGenMatched.push_back(dR_matchl<0.3);
-//	GenDR.push_back(dR_matchl);
-//	}
-//	if(push_1){
-//	isGenMatched.push_back(dR_matchs<0.3);
-//	GenDR.push_back(dR_matchs);
-//	}
-//	if(push_2){
-//		isGenMatched.push_back(dR_matchs2<0.3);
-//		GenDR.push_back(dR_matchs2);}
-//	if(push_3){
-//	isGenMatched.push_back(dR_matchs3<0.3);
-//	GenDR.push_back(dR_matchs3);}
+	float dR_matchl = 10000;
+  float dR_matchs = 10000;
+	float dR_matchs2 = 10000;
+	float dR_matchs3 = 10000;
+	int reverse =0;
+	float gen_pt=0;
+    for (size_t ig(0); ig!=genParticleHandle_->size(); ++ig) {
+        reco::GenParticleRef gp(genParticleHandle_, ig); 
+	if(abs(gp->pdgId())==13 && gp->isHardProcess()){
+		if (gp->pt() > gen_pt){reverse++; gen_pt=gp->pt();}
+		if(push_0){
+		float dphi1 = gp->phi() - leadingMuRef->phi();
+        	if (std::abs(dphi1) > 3.1415)
+            		dphi1 -= 2 * 3.1415 * dphi1/std::abs(dphi1);	
+		float deta1 = gp->eta() - leadingMuRef->eta();
+		float dR_match_temp1 = sqrt(dphi1*dphi1 + deta1*deta1);
+		if (dR_match_temp1 < dR_matchl){ dR_matchl = dR_match_temp1;}
+		}
+		if(push_1){
+		float dphi2 = gp->phi() - subleadingMuRef->phi();
+        	if (std::abs(dphi2) > 3.1415)
+            		dphi2 -= 2 * 3.1415 * dphi2/std::abs(dphi2);	
+		float deta2 = gp->eta() - subleadingMuRef->eta();
+		float dR_match_temp2 = sqrt(dphi2*dphi2 + deta2*deta2);
+		if (dR_match_temp2 < dR_matchs){ dR_matchs = dR_match_temp2;}
+		}
+		if(push_2){
+		float dphi3 = gp->phi() - subleadingMuRef2->phi();
+        	if (std::abs(dphi3) > 3.1415)
+            		dphi3 -= 2 * 3.1415 * dphi3/std::abs(dphi3);	
+		float deta3 = gp->eta() - subleadingMuRef2->eta();
+		float dR_match_temp3 = sqrt(dphi3*dphi3 + deta3*deta3);
+		if (dR_match_temp3 < dR_matchs2){ dR_matchs2 = dR_match_temp3;}
+		}
+		if(push_3){
+		float dphi4 = gp->phi() - subleadingMuRef3->phi();
+        	if (std::abs(dphi4) > 3.1415)
+            		dphi4 -= 2 * 3.1415 * dphi4/std::abs(dphi4);	
+		float deta4 = gp->eta() - subleadingMuRef3->eta();
+		float dR_match_temp4 = sqrt(dphi4*dphi4 + deta4*deta4);
+		if (dR_match_temp4 < dR_matchs3){ dR_matchs3 = dR_match_temp4;}
+		}
+		
+        	genPt_ .push_back(gp->pt());
+ 	        genEta_.push_back(gp->eta());
+       	 	genPhi_.push_back(gp->phi());
+       	 	genVxy_.push_back(sqrt(gp->vx()*gp->vx() + gp->vy()*gp->vy()));
+       		genVz_ .push_back(gp->vz());
+		}	
+	}
+	if (reverse>1){
+
+        	std::reverse(genPt_.begin(), genPt_.end()); 
+ 	        std::reverse(genEta_.begin(),genEta_.end());
+       	 	std::reverse(genPhi_.begin(),genPhi_.end());
+       	 	std::reverse(genVxy_.begin(),genVxy_.end());
+       		std::reverse(genVz_ .begin(),genVz_.end());
+	}
+	if(push_0){
+	isGenMatched.push_back(dR_matchl<0.3);
+	GenDR.push_back(dR_matchl);
+	}
+	if(push_1){
+	isGenMatched.push_back(dR_matchs<0.3);
+	GenDR.push_back(dR_matchs);
+	}
+	if(push_2){
+		isGenMatched.push_back(dR_matchs2<0.3);
+		GenDR.push_back(dR_matchs2);}
+	if(push_3){
+	isGenMatched.push_back(dR_matchs3<0.3);
+	GenDR.push_back(dR_matchs3);}
 //	float dR_matchs = 10000;
 //    for (size_t ig(0); ig!=genParticleHandle_->size(); ++ig) {
 //        reco::GenParticleRef gp(genParticleHandle_, ig); 
