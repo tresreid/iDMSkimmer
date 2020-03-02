@@ -26,6 +26,11 @@ options.register('Run2018D',
         VarParsing.VarParsing.multiplicity.singleton,
         VarParsing.VarParsing.varType.bool,
         "Is this sample Run2018D (different GT), yes (1) or no (0)")
+options.register('numThreads',
+        8,
+        VarParsing.VarParsing.multiplicity.singleton,
+        VarParsing.VarParsing.varType.int,
+        "Number of threads (for CRAB vs non-CRAB execution)")
 
 options.parseArguments()
 
@@ -99,7 +104,7 @@ process.MessageLogger = cms.Service("MessageLogger",
     )
 process.options = cms.untracked.PSet(
     wantSummary = cms.untracked.bool(True),
-    #numberOfThreads = cms.untracked.uint32(8)
+    numberOfThreads = cms.untracked.uint32(options.numThreads)
     )
 process.maxEvents = cms.untracked.PSet(
     input = cms.untracked.int32(options.maxEvents)
@@ -172,6 +177,14 @@ for idmod in id_e_modules:
 for idmod in id_ph_modules:
     setupAllVIDIdsInModule(process,idmod,setupVIDPhotonSelection)
 
+## Build muon candidate from dSA
+process.load("TrackPropagation.SteppingHelixPropagator.SteppingHelixPropagatorAny_cfi")
+process.load("TrackingTools.TrackAssociator.DetIdAssociatorESProducer_cff")
+from iDMSkimmer.washAOD.muonsFromdSA_cff import * 
+process.muonsFromdSA = muonsFromdSA.clone()
+## Now build extra muon timing variables
+from RecoMuon.MuonIdentification.muonTiming_cfi import *
+process.muontimingFromdSA = muontiming.clone(MuonCollection = cms.InputTag("muonsFromdSA"))
 
 ## Main iDM analyzer
 from iDMSkimmer.washAOD.iDMAnalyzer_cfi import iDMAnalyzer
@@ -198,13 +211,16 @@ process.ntuples_gbm = iDMAnalyzer.clone(
 #)
 
 process.commonSequence = cms.Sequence(
-    process.egmGsfElectronIDSequence 
+    process.muonsFromdSA
+    + process.muontimingFromdSA
+    + process.egmGsfElectronIDSequence 
     + process.egmPhotonIDSequence
     + process.correctionTermsPfMetType1Type2
     + process.correctionTermsPfMetType0RecoTrack
     + process.correctionTermsPfMetMult
     + process.pfMetT0rtT1Txy
     + process.ntuples_gbm
+    #+ process.ntuples_dgm
     )
 
 if options.data:
@@ -214,14 +230,12 @@ if options.data:
             + process.btagging
             + process.ak4PFCHSL1FastL2L3ResidualCorrectorChain
             + process.commonSequence
-            #+ process.ntuples_dgm
         )
     else:
         process.p = cms.Path(
             process.metFilters
             + process.ak4PFCHSL1FastL2L3ResidualCorrectorChain
             + process.commonSequence
-            #+ process.ntuples_dgm
         )
 else:
     if options.year == 2016:
@@ -230,12 +244,10 @@ else:
             + process.btagging
             + process.ak4PFCHSL1FastL2L3CorrectorChain
             + process.commonSequence
-            #+ process.ntuples_dgm
         )
     else:
         process.p = cms.Path(
             process.metFilters
             + process.ak4PFCHSL1FastL2L3CorrectorChain
             + process.commonSequence
-            #+ process.ntuples_dgm
         )
