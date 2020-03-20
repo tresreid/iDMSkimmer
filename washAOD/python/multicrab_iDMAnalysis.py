@@ -148,20 +148,21 @@ def main():
 
         total = {}
 
-        with open('../data/dataset_db_%s.json' % year, 'r') as db:
+        #with open('../data/dataset_db_%s.json' % year, 'r') as db:
+        with open('../data/dataset_db_taperecall.json', 'r') as db:
             data = json.load(db)
 
             QCD = data['QCD_' + year]
 
-            TTbar = data['TTbar_' + year]
-            for it in ['TTTo2L2Nu', 'TTSemiLeptonic', 'TTToHadronic', 'TT_diLept']:
-                if it in TTbar:
-                    del TTbar[it]
+            #TTbar = data['TTbar_' + year]
+            #for it in ['TTTo2L2Nu', 'TTSemiLeptonic', 'TTToHadronic', 'TT_diLept']:
+            #    if it in TTbar:
+            #        del TTbar[it]
 
-            SingleTop = data['SingleTop_' + year]
-            for it in ['ST_t-channel_top_5f', 'ST_t-channel_antitop_5f']:
-                if it in SingleTop:
-                    del SingleTop[it]
+            #SingleTop = data['SingleTop_' + year]
+            #for it in ['ST_t-channel_top_5f', 'ST_t-channel_antitop_5f']:
+            #    if it in SingleTop:
+            #        del SingleTop[it]
 
             WJets = data['WJets_' + year]
             for it in ['WJetsToLnu', 'WJetsToLNu_HT-70To100']:
@@ -175,22 +176,23 @@ def main():
                 if it in DY:
                     del DY[it]
 
-            Diboson = data['Diboson_' + year]
-            for it in ['WZTo3LNu', 'ZZTo2L2Nu', 'ZZTo2L2Nu_ext2', 'WWTo2L2Nu', 'WWJJToLNuLNu']:
-                if it in Diboson:
-                    del Diboson[it]
+           # Diboson = data['Diboson_' + year]
+           # for it in ['WZTo3LNu', 'ZZTo2L2Nu', 'ZZTo2L2Nu_ext2', 'WWTo2L2Nu', 'WWJJToLNuLNu']:
+           #     if it in Diboson:
+           #         del Diboson[it]
 
-            Triboson = data['Triboson_' + year]
+           # Triboson = data['Triboson_' + year]
 
-            total_MC = merge_dicts(QCD, TTbar, SingleTop, ZJets, WJets, DY, Diboson, Triboson)
+            total_MC = merge_dicts(QCD, ZJets, WJets, DY)
+            #total_MC = merge_dicts(QCD, TTbar, SingleTop, ZJets, WJets, DY, Diboson, Triboson)
 
             for key, val in total_MC.items():
                 total_MC[key + '_' + year] = val
                 del total_MC[key]
 
-            total_Data = data['Data_MET_' + year]
+            #total_Data = data['Data_MET_' + year]
 
-            total_Trig = data['Data_SingleMu_' + year]
+            #total_Trig = data['Data_SingleMu_' + year]
 
             if options.sampleType == 'data':
                 total = merge_dicts(total, total_Data)
@@ -220,7 +222,7 @@ def main():
             config.JobType.numCores = 1
 
             config.Data.inputDataset = dataset
-            config.General.requestName = 'iDMAnalysis_' + sample 
+            config.General.requestName = 'iDMAnalysis_' + sample +'_v2' 
             #config.Data.outputDatasetTag = sample
 
             # If we need to pull input files from a list file instead of CRAB:
