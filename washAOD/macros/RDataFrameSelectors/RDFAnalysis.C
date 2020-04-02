@@ -18,9 +18,10 @@ void RDFAnalysis::SetParams(common::SampleInfo sample_info) {
     xsec_ = sample_info_.xsec;
     year_ = sample_info_.year;
     TFile* pileup;
+    TFile* trig_wgt;
     if (year_ == 2017) {
         lumi_ = 41.53 * 1000;
-        trig_wgt = .95; // TODO change later
+        trig_wgt = new TFile("../../data/trig_weights_2017test.root");//.95; // TODO change later
         if (group_ == "ZJets") {
             //float xsec2_ = xsec_ * 100;
             if (name_.Contains("HT-100To200"))
@@ -59,13 +60,15 @@ void RDFAnalysis::SetParams(common::SampleInfo sample_info) {
         //pileup = new TFile("../../data/puWeights_80x_37ifb.root");
         pileup = new TFile("../../data/pileup/PUWeights_2016.root");
         lumi_ = 35.92 * 1000;
-        trig_wgt = 1.0; // TODO change later
+     //   trig_wgt = 1.0; // TODO change later
+        trig_wgt = new TFile("../../data/trig_weights_2016test.root");//.95; // TODO change later
     }
     else if (year_ == 2018) {
         //pileup = new TFile("../../data/puWeights_10x_56ifb.root");
         pileup = new TFile("../../data/pileup/PUWeights_2018.root");
         lumi_ = 59.74 * 1000;
-        trig_wgt = 1.0; // TODO change later
+        //trig_wgt = 1.0; // TODO change later
+        trig_wgt = new TFile("../../data/trig_weights_test.root");//.95; // TODO change later
     }
     else {
         std::cout << "ERROR! Year not one of 2016/2017/2018. Exiting..." << std::endl;
@@ -93,6 +96,13 @@ void RDFAnalysis::SetParams(common::SampleInfo sample_info) {
     sf_w_qcd->SetDirectory(0);
     sf_w_ewk->SetDirectory(0);
     kfactors->Close();
+
+
+   // Set trig weights 
+        TH1F * trig_hist = (TH1F*)trig_wgt->Get(Form("weights_reco_PF_MET_pt_%d_MCTotal_%d_ratio",year_,year_));
+        trig_pu = (TH1F*)trig_hist->Clone();
+        trig_pu->SetDirectory(0);
+        trig_wgt->Close();
     
     // Set up pileup corrections
     if ((year_ == 2017) && (group_ == "ZJets")) {
@@ -194,11 +204,15 @@ Bool_t RDFAnalysis::Process(TChain * chain) {
             sf_top = 1.0f;
         return sf_top;
    };
+   auto calcTrig = [&](float met) { 
+       //return (float)trig_pu->GetBinContent(trig_pu->FindBin((double)met)); 
+       return (float)1.0;//(float)trig_pu->GetBinContent(sf_pu->FindBin((double)met)); 
+   };
    auto calcPUsf = [&](int pileup) { 
        return (float)sf_pu->GetBinContent(sf_pu->FindBin((double)pileup)); 
    };
-   auto calcTotalWgt = [&](float Zwgt, float Wwgt, float Twgt, float PUwgt, float genwgt) {
-       return trig_wgt* Zwgt * Wwgt * PUwgt * genwgt * xsec_ * lumi_ / sum_gen_wgt_;
+   auto calcTotalWgt = [&](float Zwgt, float Wwgt, float Twgt, float PUwgt, float genwgt, float trigwgt) {
+       return trigwgt * Zwgt * Wwgt * PUwgt * genwgt * xsec_ * lumi_ / sum_gen_wgt_;
    };
    auto calcHemVeto = [&](bool hem_veto) { 
        return (year_ == 2018 ? !hem_veto : true);
@@ -271,17 +285,6 @@ Bool_t RDFAnalysis::Process(TChain * chain) {
 
    auto df_wgts = df.
        Define("reco_PF_jet_pt0", takeFirstJetPt, {"reco_PF_jet_pt"}).
-       Define("reco_PF_jet_pt1", takeSecondJetPt, {"reco_PF_jet_pt"}).
-       Define("reco_PF_jet_eta0", takeFirstJetEta, {"reco_PF_jet_eta"}).
-       Define("reco_PF_jet_eta1", takeSecondJetEta, {"reco_PF_jet_eta"}).
-       Define("reco_PF_jet_phi0", takeFirstJetPhi, {"reco_PF_jet_phi"}).
-       Define("reco_PF_jet_phi1", takeSecondJetPhi, {"reco_PF_jet_phi"}).
-       Define("reco_sel_mu_pt0", takeFirstMuonPt, {"reco_sel_mu_pt"}).
-       Define("reco_sel_mu_pt1", takeSecondMuonPt, {"reco_sel_mu_pt"}).
-       Define("reco_sel_mu_eta0", takeFirstMuonEta, {"reco_sel_mu_eta"}).
-       Define("reco_sel_mu_eta1", takeSecondMuonEta, {"reco_sel_mu_eta"}).
-       Define("reco_sel_mu_phi0", takeFirstMuonPhi, {"reco_sel_mu_phi"}).
-       Define("reco_sel_mu_phi1", takeSecondMuonPhi, {"reco_sel_mu_phi"}).
        Define("reco_sel_mu_dxy0", takeFirstMuonDxy, {"reco_sel_mu_dxy"}).
        Define("reco_sel_mu_dz0", takeFirstMuonDz, {"reco_sel_mu_dz"}).
        Define("reco_sel_mu_dxy1", takeSecondMuonDxy, {"reco_sel_mu_dxy"}).
@@ -312,8 +315,9 @@ Bool_t RDFAnalysis::Process(TChain * chain) {
        Define("Wwgt", calcWsf, {"gen_ID", "gen_pt"}).
        Define("Twgt", calcTsf, {"gen_ID", "gen_pt"}).
        Define("PUwgt", calcPUsf, {"gen_pu_true"}).
-       // Define("wgt", "1.0"); //switch back later 
-       Define("wgt", calcTotalWgt, {"Zwgt", "Wwgt", "Twgt", "PUwgt", "gen_wgt"});
+       Define("Trigwgt", calcTrig, {"reco_PF_MET_pt"}).
+       //Define("Trigwgt", "1.0"); //switch back later 
+       Define("wgt", calcTotalWgt, {"Zwgt", "Wwgt", "Twgt", "PUwgt", "gen_wgt","Trigwgt"});
    }
 
 

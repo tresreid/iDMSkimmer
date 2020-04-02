@@ -101,6 +101,7 @@ class TrackQuality :
         std::vector<float> genVz_;
         std::vector<float> genDr_;
         std::vector<float> recoPt_;
+        std::vector<float> recoPterr_;
         std::vector<float> recoEta_;
         std::vector<float> recoPhi_;
         std::vector<float> recoDxy_;
@@ -125,8 +126,8 @@ class TrackQuality :
 
 
 	float delPhiMetMu;// delta phi between met and dimuon phi
-        std::vector<float> trackPlanes; // track quality info planes =2
-        std::vector<float> trackHits; // track quality info hits =12
+        std::vector<int> trackPlanes; // track quality info planes =2
+        std::vector<int> trackHits; // track quality info hits =12
         std::vector<float> trackChi2; // track quality info chi2 =10
         std::vector<bool> qualityTrack;// is the track good quality (above criteria)
         std::vector<bool> isGenMatched; // if the muon is gen matched dR<0.3

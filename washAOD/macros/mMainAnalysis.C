@@ -191,6 +191,7 @@ namespace macro {
             for (auto & [mode, cuts] : modes) {
                 for (auto & [cut, hist_vec] : cuts) {
                     THStack * hstack;
+                    if (hist_vec.empty()) continue;
                     if (mode == common::BKG)
                         hstack = new THStack(Form("%s_cut%d-BKG", plot_name.Data(), cut), histos_info[plot_name]->title);
                     else if (mode == common::DATA)
@@ -209,6 +210,7 @@ namespace macro {
 
                     if (!cuts_info[cut].efficiency.Contains("none")) {
                         THStack * hstack2;
+                        if (hist_vec.empty()) continue;
                         if (mode == common::BKG)
                              hstack2 = new THStack(Form("%s_%scut%d-BKG", plot_name.Data(),cuts_info[cut].efficiency.Data(), cut), histos_info[plot_name]->title);
                         else if (mode == common::DATA)

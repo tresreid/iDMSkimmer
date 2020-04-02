@@ -59,13 +59,14 @@ public :
    Double_t xsec_;
    Double_t lumi_;
    int year_;
-   float trig_wgt;
+   //float trig_wgt;
    common::MODE mode_;
    TString group_;
 
    TH1F * sf_z_qcd, * sf_z_ewk;
    TH1F * sf_w_qcd, * sf_w_ewk;
    TH1F * sf_pu;
+   TH1F * trig_pu;
 
 };
 

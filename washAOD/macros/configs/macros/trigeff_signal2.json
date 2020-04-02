@@ -1,0 +1,21 @@
+[
+    {
+        "name": "mMainAnalysis",
+        "config": {
+            "plots": [
+                {
+                    "quantity": "reco_PF_MET_pt",
+                    "groups": [ "sig_5p25_1", "sig_5p25_10", "sig_5p25_100", "sig_5p25_1000", "sig_52p5_1", "sig_52p5_10", "sig_52p5_100", "sig_52p5_1000", "sig_6p0_1", "sig_6p0_10", "sig_6p0_100", "sig_6p0_1000", "sig_60p0_1", "sig_60p0_10", "sig_60p0_100", "sig_60p0_1000" ],
+                    "cuts": [0, 1, 2, 3, 4, 5, 6, 7, 8], 
+                    "type": "float1D",
+                    "name": "reco_PF_MET_pt",
+                    "title": "PF MET pT [GeV]",
+                    "nbinsX": 31,
+                    "lowX": 0,
+                    "highX": 1000,
+                    "binEdgesX": [ 0,10,20, 30,40,50,60,70,80,90, 100,110,120,130,140,150,160,170,180,190, 200,225, 250,275, 300, 350, 400, 500, 600, 700, 800, 1000]
+                }
+            ]
+        }
+    }
+]

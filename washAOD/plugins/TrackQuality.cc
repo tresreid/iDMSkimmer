@@ -85,6 +85,7 @@ void TrackQuality::beginJob()
         cutsTree->Branch("genVxy", &genVxy_);
         cutsTree->Branch("genVz",  &genVz_);
         cutsTree->Branch("recoPt",  &recoPt_);
+        cutsTree->Branch("recoPterr",  &recoPterr_);
         cutsTree->Branch("recoEta", &recoEta_);
         cutsTree->Branch("recoPhi", &recoPhi_);
         cutsTree->Branch("recoDxy", &recoDxy_);
@@ -229,6 +230,7 @@ void TrackQuality::analyze(const edm::Event& iEvent, const edm::EventSetup& iSet
     genVxy_.clear();
     genVz_ .clear();
     recoPt_ .clear();
+    recoPterr_ .clear();
     recoEta_.clear();
     recoPhi_.clear();
     recoDxy_.clear();
@@ -533,6 +535,7 @@ void TrackQuality::analyze(const edm::Event& iEvent, const edm::EventSetup& iSet
    int passQ =0;
 	if(push_0){
         recoPt_ .push_back(leadingMuRef->pt());
+        recoPterr_ .push_back(leadingMuRef->ptError());
         recoEta_.push_back(leadingMuRef->eta());
         recoPhi_.push_back(leadingMuRef->phi());
         recoDxy_.push_back(leadingMuRef->dxy());
@@ -548,6 +551,7 @@ void TrackQuality::analyze(const edm::Event& iEvent, const edm::EventSetup& iSet
 	if(push_1){
 //        if (goodQualityTracks > 1) {
             recoPt_ .push_back(subleadingMuRef->pt());
+            recoPterr_ .push_back(subleadingMuRef->ptError());
             recoEta_.push_back(subleadingMuRef->eta());
             recoPhi_.push_back(subleadingMuRef->phi());
             recoDxy_.push_back(subleadingMuRef->dxy());
@@ -573,6 +577,7 @@ void TrackQuality::analyze(const edm::Event& iEvent, const edm::EventSetup& iSet
 
 	    if(push_2){
             recoPt_ .push_back(subleadingMuRef2->pt());
+            recoPterr_ .push_back(subleadingMuRef2->ptError());
             recoEta_.push_back(subleadingMuRef2->eta());
             recoPhi_.push_back(subleadingMuRef2->phi());
             recoDxy_.push_back(subleadingMuRef2->dxy());
@@ -596,6 +601,7 @@ void TrackQuality::analyze(const edm::Event& iEvent, const edm::EventSetup& iSet
 	}
 	    if(push_3){
             recoPt_ .push_back(subleadingMuRef3->pt());
+            recoPterr_ .push_back(subleadingMuRef3->ptError());
             recoEta_.push_back(subleadingMuRef3->eta());
             recoPhi_.push_back(subleadingMuRef3->phi());
             recoDxy_.push_back(subleadingMuRef3->dxy());

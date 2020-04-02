@@ -16,8 +16,8 @@
         "description": "Trigger fired (120 GeV METNoMu)"
     },
     {
-        "cut": "reco_PF_MET_pt > 200",
-        "description": "MET > 200 GeV"
+        "cut": "reco_PF_MET_pt > 160",
+        "description": "MET > 160 GeV"
     },
     {
         "cut": "abs(reco_Calo_MET_pt - reco_PF_MET_pt)/reco_Calo_MET_pt < 1.0",

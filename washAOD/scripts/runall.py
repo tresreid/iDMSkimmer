@@ -48,7 +48,7 @@ for mass in masslist:
 			#cmdxx = "cmsRun ../python/{1} year=2017 inputFiles=/store/mc/RunIIFall17DRPremix/WW_TuneCP5_13TeV-pythia8/AODSIM/PU2017_94X_mc2017_realistic_v11-v1/1110000/F216796B-8BD3-E811-816F-008CFA197AEC.root outputFile=test_2017".format(ofile,analyzer)#,mass,life)
 			#cmdxx = "cmsRun ../python/{1} year=2016 inputFiles=/store/mc/RunIISummer16DR80Premix/WJetsToLNu_HT-200To400_TuneCUETP8M1_13TeV-madgraphMLM-pythia8/AODSIM/PUMoriond17_80X_mcRun2_asymptotic_2016_TrancheIV_v6_ext2-v1/80000/BAAB4424-B6C9-E611-A731-901B0E5427B6.root outputFile=test_2016".format(ofile,analyzer)#,mass,life)
 			#cmdxx = "cmsRun ../python/{1} year=2018 inputFiles=/store/data/Run2018A/SingleMuon/AOD/17Sep2018-v2/90000/F8382E90-9BC4-4E4A-8EB2-952904BAE395.root outputFile=test_{0}".format(ofile,analyzer)#,mass,life)
-			cmdxx = "cmsRun ../python/{1} year=2018 inputFiles_load=test.txt outputFile=test_2018".format(ofile,analyzer)#,mass,life)
+			cmdxx = "cmsRun ../python/{1} year=2018 inputFiles_load=test_lowmassv2.txt outputFile=test_2018_lowmassv2".format(ofile,analyzer)#,mass,life)
 			#cmdxx = "cmsRun ../python/{1} year=2018 inputFiles_load=root://cmseos.fnal.gov//store/group/lpcmetx/iDM/Ntuples/2018/signal/iDMAnalysis_seventhrun/Mchi-52p5_dMchi-5p0_ctau-100/iDMAnalysis_Mchi-52p5_dMchi-5p0_ctau-100.root".format(ofile,analyzer)#,mass,life)
 			#cmdxx = "cmsRun ../python/{1} year=2018 inputFiles_load=../data/iDM/2018/signal/test.list outputFile=test_{0}".format(ofile,analyzer)#,mass,life)
 		
@@ -69,10 +69,10 @@ for mass in masslist:
 			process1.wait()
 
 			#transfer = "xrdcp {0}/{1} root://cmseos.fnal.gov//store/group/lpcmetx/iDM/Ntuples/2018/signal/reco_effi/{2}_ctau-{3}/{1}".format(odir,ofile,mass,life)
-			transfer = "xrdcp {0}/{1} root://cmseos.fnal.gov//store/group/lpcmetx/iDM/Ntuples/2018/signal/{4}/{2}_ctau-{3}/{1}".format(odir,ofile,mass,life,analyzer_name[analyzer])
-			print(transfer)
-                	process2 = subprocess.Popen(transfer,shell=True, stdout=subprocess.PIPE)
-                	for line2 in iter(process2.stdout.readline,b''):
-                        	print(line2)
-                	process2.stdout.close()
-                	process2.wait()
+			#transfer = "xrdcp {0}/{1} root://cmseos.fnal.gov//store/group/lpcmetx/iDM/Ntuples/2018/signal/{4}/{2}_ctau-{3}/{1}".format(odir,ofile,mass,life,analyzer_name[analyzer])
+			#print(transfer)
+      #          	process2 = subprocess.Popen(transfer,shell=True, stdout=subprocess.PIPE)
+      #          	for line2 in iter(process2.stdout.readline,b''):
+      #                  	print(line2)
+      #          	process2.stdout.close()
+      #          	process2.wait()
