@@ -231,11 +231,12 @@ Bool_t RDFAnalysis::Process(TChain * chain) {
     };
 
     auto calcTrigsf = [&](float met) {
-        if (met < 120.0)
-            return 0.3f;
-        if (met > 800.0)
-            return 1.0f;
-        return (float)trig_sf->GetBinContent(trig_sf->FindBin(met));
+        return 1.0f;
+        //if (met < 120.0)
+        //    return 0.3f;
+        //if (met > 800.0)
+        //    return 1.0f;
+        //return (float)trig_sf->GetBinContent(trig_sf->FindBin(met));
     };
 
     auto calcPUsf = [&](int pileup) { 
@@ -469,6 +470,8 @@ Bool_t RDFAnalysis::Process(TChain * chain) {
         Define("reco_PF_jet_phi1", takeQuantity1, {jet_phi.Data()}).
         Define("reco_dsa0_trk_chi2", takeQuantity0, {"reco_dsa_trk_chi2"}).
         Define("reco_dsa1_trk_chi2", takeQuantity1, {"reco_dsa_trk_chi2"}).
+        Define("reco_gm_pt0", takeQuantity0, {"reco_gm_pt"}).
+        Define("reco_gm_eta0", takeQuantity0, {"reco_gm_eta"}).
         Define("MET_jet_dphi", calcMETJetDphi, {jet_phi.Data(), MET_phi.Data()}).
         Define("MET_jet_dphi0", takeQuantity0, {"MET_jet_dphi"}).
         Define("recoil_jet_phi_dphi", calcMETJetDphi, {jet_phi.Data(), "reco_PF_recoil_phi"}).

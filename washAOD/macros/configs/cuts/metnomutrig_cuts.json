@@ -17,11 +17,11 @@
     },
     {
 	    "cut": "(reco_PF_jet_pt0 > 80) && (abs(reco_PF_jet_eta0)<2.4)",
-	    "description": "jet selection (pt>120, |#eta|<2.4)"
+	    "description": "jet selection (pt>80, |#eta|<2.4)"
     },
     {
-	    "cut": "(reco_sel_mu_pt0 > 40) && (abs(reco_sel_mu_eta0)<2.4)",
-	    "description": "mu selection (pt>40, |#eta|<2.4)"
+	    "cut": "(reco_gm_pt0 > 40) && (abs(reco_gm_eta0)<2.4)",
+	    "description": "global mu selection (pt>40, |#eta|<2.4)"
     },
     {
 	    "cut": "abs(fake_MET_fraction) < 0.5",
