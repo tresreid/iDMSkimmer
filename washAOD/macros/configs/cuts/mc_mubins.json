@@ -1,0 +1,32 @@
+[
+    {
+        "cut": "1",
+        "description": "No cuts"
+    },
+    {
+        "cut": "hem_veto",
+        "description": "HEM veto"
+    },
+    {
+        "cut": "MET_filters_fail_bits == 0",
+        "description": "MET filter bits pass"
+    },
+    {
+	    "cut": "(reco_PF_jet_pt0 > 80) && (abs(reco_PF_jet_eta0)<2.4)",
+	    "description": "jet selection (pt>80, |#eta|<2.4)"
+    },
+    {
+	    "cut": "(reco_gm_muon_pt0 > 40) && (reco_gm_muon_pt0 < 4000) && (abs(reco_gm_muon_eta0)<2.4)",
+	    "description": "mu selection (pt>40, |#eta|<2.4)"
+    },
+    {
+	    "cut": "abs(fake_MET_fraction) < 0.5",
+	    "description": "|pfMet-CaloMet|/recoil <0.5",
+	    "efficiency": "denom"
+    },
+    {
+    	"cut": "(trig_fired&(1<<3)) == (1<<3)",
+    	"description": "trigger fired (120MetNoMu)",
+    	"efficiency": "num"
+    } 
+]

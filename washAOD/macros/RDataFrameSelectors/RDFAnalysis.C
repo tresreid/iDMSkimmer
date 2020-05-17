@@ -357,6 +357,10 @@ Bool_t RDFAnalysis::Process(TChain * chain) {
         auto vtx_chi2_inf = Where(vtx_pass == 1, vtx_chi2, 999999.f);
         return ArgMin(vtx_chi2_inf); 
     };
+   
+    auto goodQuantity = [&](RVec<float> quantity, RVec<bool> pass){
+      return quantity[pass];
+    };
 
     // for each dsa muon in best vtx, look for *best* gm match in dr
     auto findMuonMatch0 = [&](RVec<int> dsagm_match, RVec<float> dsagm_dR, RVec<bool> vtx_pass_dsagm, size_t dsa_index_0, size_t dsa_index_1) {
@@ -442,6 +446,9 @@ Bool_t RDFAnalysis::Process(TChain * chain) {
     auto df_wgts = df.
         Define("dsa_pass_ID", passMuonID, {"reco_dsa_trk_n_planes", "reco_dsa_trk_n_hits", "reco_dsa_trk_chi2", "reco_dsa_pt", "reco_dsa_eta", "reco_dsa_pt_err"}).
         Define("gm_pass_ID", passMuonID, {"reco_gm_trk_n_planes", "reco_gm_trk_n_hits", "reco_gm_trk_chi2", "reco_gm_pt", "reco_gm_eta", "reco_gm_pt_err"}).
+        Define("reco_pass_gm_pt", goodQuantity, {"reco_gm_pt","gm_pass_ID"}).
+        Define("reco_pass_gm_eta", goodQuantity, {"reco_gm_eta","gm_pass_ID"}).
+        Define("reco_pass_gm_phi", goodQuantity, {"reco_gm_phi","gm_pass_ID"}).
         Define("n_good_dsa", "(int)Nonzero(dsa_pass_ID).size()").
         Define("n_good_gm", "(int)Nonzero(gm_pass_ID).size()").
         Define("good_vtx_dsadsa", passVtxID, {"dsa_pass_ID", "dsa_pass_ID", "reco_dsa_charge", "reco_dsa_charge", "reco_vtx_dsadsa_reduced_chi2"}).
@@ -489,13 +496,13 @@ Bool_t RDFAnalysis::Process(TChain * chain) {
         Define("reco_PF_jet_phi1", takeQuantity1, {jet_phi.Data()}).
         Define("reco_dsa0_trk_chi2", takeQuantity0, {"reco_dsa_trk_chi2"}).
         Define("reco_dsa1_trk_chi2", takeQuantity1, {"reco_dsa_trk_chi2"}).
-        Define("reco_gm_pt0", takeQuantity0, {"reco_gm_pt"}).
-        Define("reco_gm_eta0", takeQuantity0, {"reco_gm_eta"}).
+        Define("reco_gm_muon_pt0", takeQuantity0, {"reco_pass_gm_pt"}).
+        Define("reco_gm_muon_eta0", takeQuantity0, {"reco_pass_gm_eta"}).
         Define("MET_jet_dphi", calcMETJetDphi, {jet_phi.Data(), MET_phi.Data()}).
         Define("MET_jet_dphi0", takeQuantity0, {"MET_jet_dphi"}).
         Define("recoil_jet_phi_dphi", calcMETJetDphi, {jet_phi.Data(), "reco_PF_recoil_phi"}).
-        Define("fake_MET_fraction", findFakeMETCut, {MET_pt.Data(), MET_phi.Data(), "reco_Calo_MET_pt", "reco_Calo_MET_phi", "reco_PF_recoil_pt"}).
-        Define("reco_PF_MetNoMu_pt", findMetNoMu, {MET_pt.Data(), MET_phi.Data(), "reco_gm_pt", "reco_gm_phi"}).
+        Define("fake_MET_fraction", findFakeMETCut, {MET_pt.Data(), MET_phi.Data(), "reco_Calo_MET_pt", "reco_Calo_MET_phi", "reco_Calo_MET_pt"}).
+        Define("reco_PF_MetNoMu_pt", findMetNoMu, {MET_pt.Data(), MET_phi.Data(), "reco_pass_gm_pt", "reco_pass_gm_phi"}).
         Define("hem_veto", calcHemVeto, {"reco_PF_HEM_flag"}).
         Define("reco_n_bTag_jets", calcNBTag, {"reco_PF_jet_corr_BTag"}).
         Define("reco_METmu_dphi_v2", calcRecoMETmuDphi, {"reco_sel_mu_pt0", "reco_sel_mu_phi0", "reco_sel_mu_pt1", "reco_sel_mu_phi1", MET_phi.Data()}).

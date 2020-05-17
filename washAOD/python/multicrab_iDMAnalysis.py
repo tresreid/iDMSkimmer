@@ -83,7 +83,7 @@ def main():
     options = getOptions()
 
     isData = False
-    if options.sampleType == 'data' or options.sampleType == 'NoBPTX':
+    if options.sampleType == 'data' or options.sampleType == 'NoBPTX' or options.sampleType =='trig':
         isData = True
 
     year = options.year

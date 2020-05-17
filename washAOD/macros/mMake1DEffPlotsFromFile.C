@@ -272,14 +272,13 @@ namespace macro {
                         TH1F * SigTotal_denom_5 = (TH1F*)(((TH1F*)hsdx_5->GetStack()->Last())->Clone());
                         SigTotal_num_5->GetXaxis()->SetTitle(SigTotal_xname); 
                         SigTotal_denom_5->GetXaxis()->SetTitle(SigTotal_xname);  
-                        std::cout<<SigTotal_xname<<std::endl; 
+                        //std::cout<<SigTotal_xname<<std::endl; 
                         for (int i =0; i<=SigTotal_num_5->GetNbinsX();i++){ 
 //                          if(SigTotal_num_5->GetBinContent(i)== 0){SigTotal_num_5->SetBinContent(i,0.00000001);} //sig added
 //                          if(SigTotal_denom_5->GetBinContent(i)== 0){SigTotal_denom_5->SetBinContent(i,1);} //sig added
                           if(SigTotal_num_5->GetBinContent(i)>SigTotal_denom_5->GetBinContent(i)){
                             SigTotal_denom_5->SetBinContent(i,SigTotal_num_5->GetBinContent(i));
                           }
-                          std::cout<<"sig: "<<SigTotal_num_5->GetBinContent(i)<<" / "<<SigTotal_denom_5->GetBinContent(i)<<std::endl;
                         }
                         TEfficiency* sig_eff_5 = new TEfficiency(*SigTotal_num_5,*SigTotal_denom_5);
                         sig_eff_5->SetLineColor(common::group_plot_info["sig_5p25_1"].color);
@@ -320,7 +319,7 @@ namespace macro {
                   TF1* f1 = new TF1("f1","0.5*[2]*(TMath::Erf((x-[0])/[1]) +1)",lowfit,highfit);
                   f1->SetParameters(33,36,.99);
                   f1->SetLineColor(mc_eff->GetLineColor());
-                  //mc_eff->Fit(f1,"SAME ER+");
+                  mc_eff->Fit(f1,"SAME ER+");
 
                   TF1* f2 = new TF1("f2","0.5*[2]*(TMath::TanH((x-[0])/[1]) +1)",lowfit,highfit);
                   TF1* f3 = new TF1("f3","0.5*[2]*(TMath::ATan((x-[0])/[1]) +1.6)",lowfit,highfit);
@@ -334,7 +333,7 @@ namespace macro {
                   f4->SetLineColor(5);
                   f5->SetParameters(30,30,.89);
                   f5->SetLineColor(6);
-                  mc_eff->Fit(f2,"SAME ER+");
+                  //mc_eff->Fit(f2,"SAME ER+");
                   //mc_eff->Fit(f3,"SAME ER+");
                   //mc_eff->Fit(f4,"SAME ER+");
                   //mc_eff->Fit(f5,"SAME ER+");
@@ -381,7 +380,7 @@ namespace macro {
                           TF1* f1 = new TF1("f1","0.5*[2]*(TMath::Erf((x-[0])/[1]) +1)",lowfit,highfit);
                           f1->SetParameters(25,36,1.0);
                           f1->SetLineColor(hs->GetLineColor());
-                          //hs->Fit(f1,"SAME R+");
+                          hs->Fit(f1,"SAME R+");
 
                           TF1* f2 = new TF1("f2","0.5*[2]*(TMath::TanH((x-[0])/[1]) +1)",lowfit,highfit);
                           TF1* f3 = new TF1("f3","0.5*[2]*(TMath::ATan((x-[0])/[1]) +1.6)",lowfit,highfit);
@@ -395,7 +394,7 @@ namespace macro {
                           f4->SetLineColor(5);
                           f5->SetParameters(30,30,.99);
                           f5->SetLineColor(6);
-                          hs->Fit(f2,"SAME ER+");
+                          //hs->Fit(f2,"SAME ER+");
                           //hs->Fit(f3,"SAME ER+");
                           //hs->Fit(f4,"SAME ER+");
                           //hs->Fit(f5,"SAME ER+");
@@ -593,6 +592,8 @@ namespace macro {
         }
 
     // Make ratio main plots (weights)
+   bool make_weights= false;
+  if(make_weights){
         for (auto & pair : canvases) {
 
             auto * c = pair.second.get();
@@ -648,7 +649,6 @@ namespace macro {
         data_ratio->SetBinContent(i,data_hist->GetEfficiency(i));
         data_ratio_low->SetBinContent(i,data_hist->GetEfficiency(i)-data_hist->GetEfficiencyErrorLow(i));
         data_ratio_high->SetBinContent(i,data_hist->GetEfficiency(i)+data_hist->GetEfficiencyErrorUp(i));
-        std::cout<<"Data diff: "<<data_hist->GetEfficiencyErrorLow(i) - data_hist->GetEfficiencyErrorUp(i)<< " low: "<< data_hist->GetEfficiencyErrorLow(i)<<" Data high: "<<data_hist->GetEfficiencyErrorUp(i)<<std::endl;
         }
                 //data_ratio->Sumw2();
                 //data_ratio_low->Sumw2();
@@ -671,7 +671,6 @@ namespace macro {
         MC_ratio->SetBinContent(i,MC_hist->GetEfficiency(i));
         MC_ratio_low->SetBinContent(i,MC_hist->GetEfficiency(i)-MC_hist->GetEfficiencyErrorLow(i));
         MC_ratio_high->SetBinContent(i,MC_hist->GetEfficiency(i)+MC_hist->GetEfficiencyErrorUp(i));
-        std::cout<<"MC diff: "<<MC_hist->GetEfficiencyErrorLow(i) - MC_hist->GetEfficiencyErrorUp(i)<< "MC low: "<< MC_hist->GetEfficiencyErrorLow(i)<<" MC high: "<<MC_hist->GetEfficiencyErrorUp(i)<<std::endl;
         }
                 //MC_ratio->Sumw2();
                 //MC_ratio_low->Sumw2();
@@ -782,6 +781,7 @@ namespace macro {
             }
 
         }
+    }//end weights if
       
       // Build legend for all canvases
         for (auto & pair : canvases) {
@@ -806,7 +806,8 @@ namespace macro {
                 if (TString(hs->GetName()).Contains("sig")){
                     TString group = ((TObjString*)(TString(hs->GetName()).Tokenize("_")->At(5)))->String();
                     group.Append("_").Append(((TObjString*)(TString(hs->GetName()).Tokenize("_")->At(6)))->String());
-                    const char* leg = common::group_plot_info[group].legend.Data();
+                    //std::cout<<"group: "<<group.Data()<<std::endl;
+                    const char* leg = common::group_plot_info[group.Data()].legend.Data();
                     legend->AddEntry(hs, leg, "lep");
                 }
 

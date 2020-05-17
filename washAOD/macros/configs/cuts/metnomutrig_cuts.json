@@ -4,7 +4,7 @@
         "description": "No cuts"
     },
     {
-        "cut": "(trig_fired &(1<<7))==(1<<7)",
+        "cut": "(trig_fired &(1<<8))==(1<<8)",
         "description": "Reference trigger fired (IsoMu27)"
     },
     {
@@ -20,7 +20,7 @@
 	    "description": "jet selection (pt>80, |#eta|<2.4)"
     },
     {
-	    "cut": "(reco_gm_pt0 > 40) && (abs(reco_gm_eta0)<2.4)",
+	    "cut": "(reco_gm_muon_pt0 > 40) && (abs(reco_gm_muon_eta0)<2.4)",
 	    "description": "global mu selection (pt>40, |#eta|<2.4)"
     },
     {

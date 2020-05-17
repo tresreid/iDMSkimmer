@@ -1,8 +1,8 @@
 {
-    "singleMu_Run2018A_v3": {
+    "singleMu_Run2018A": {
         "dir": [
-            "root://cmseos.fnal.gov//store/group/lpcmetx/iDM/Ntuples/2018/backgrounds_twelthrun/SingleMuon/crab_iDMAnalysis_singleMu_Run2018A_v3/200503_121337/0000",
-            "root://cmseos.fnal.gov//store/group/lpcmetx/iDM/Ntuples/2018/backgrounds_twelthrun/SingleMuon/crab_iDMAnalysis_singleMu_Run2018A_v3/200503_121337/0001"
+            "root://cmseos.fnal.gov//store/group/lpcmetx/iDM/Ntuples/2018/data_twelthrun/SingleMuon/crab_iDMAnalysis_singleMu_Run2018A/200507_223327/0000",
+            "root://cmseos.fnal.gov//store/group/lpcmetx/iDM/Ntuples/2018/data_twelthrun/SingleMuon/crab_iDMAnalysis_singleMu_Run2018A/200507_223327/0001"
         ],
         "group": "data",
         "mode": "DATA",
@@ -11,11 +11,10 @@
         "year": 2018,
         "xsec": -1
     },
-    "singleMu_Run2018B_v3": {
+    "singleMu_Run2018B": {
         "dir": [
-            "root://cmseos.fnal.gov//store/group/lpcmetx/iDM/Ntuples/2018/backgrounds_twelthrun/SingleMuon/crab_iDMAnalysis_singleMu_Run2018B_v3/200503_121153/0000",
-            "root://cmseos.fnal.gov//store/group/lpcmetx/iDM/Ntuples/2018/backgrounds_twelthrun/SingleMuon/crab_iDMAnalysis_singleMu_Run2018B_v3/200503_121153/0001",
-            "root://cmseos.fnal.gov//store/group/lpcmetx/iDM/Ntuples/2018/backgrounds_twelthrun/SingleMuon/crab_iDMAnalysis_singleMu_Run2018B_v3/200503_121153/0002"
+            "root://cmseos.fnal.gov//store/group/lpcmetx/iDM/Ntuples/2018/data_twelthrun/SingleMuon/crab_iDMAnalysis_singleMu_Run2018B/200507_223223/0000",
+            "root://cmseos.fnal.gov//store/group/lpcmetx/iDM/Ntuples/2018/data_twelthrun/SingleMuon/crab_iDMAnalysis_singleMu_Run2018B/200507_223223/0001"
         ],
         "group": "data",
         "mode": "DATA",
@@ -24,9 +23,9 @@
         "year": 2018,
         "xsec": -1
     },
-    "singleMu_Run2018C_v3": {
+    "singleMu_Run2018C": {
         "dir": [
-            "root://cmseos.fnal.gov//store/group/lpcmetx/iDM/Ntuples/2018/backgrounds_twelthrun/SingleMuon/crab_iDMAnalysis_singleMu_Run2018C_v3/200503_121246/0000"
+            "root://cmseos.fnal.gov//store/group/lpcmetx/iDM/Ntuples/2018/data_twelthrun/SingleMuon/crab_iDMAnalysis_singleMu_Run2018C/200507_223256/0000"
         ],
         "group": "data",
         "mode": "DATA",
@@ -35,11 +34,15 @@
         "year": 2018,
         "xsec": -1
     },
-    "singleMu_Run2018D_v3": {
+    "singleMu_Run2018D": {
         "dir": [
-            "root://cmseos.fnal.gov//store/group/lpcmetx/iDM/Ntuples/2018/backgrounds_twelthrun/SingleMuon/crab_iDMAnalysis_singleMu_Run2018D_v3/200503_121426/0000",
-            "root://cmseos.fnal.gov//store/group/lpcmetx/iDM/Ntuples/2018/backgrounds_twelthrun/SingleMuon/crab_iDMAnalysis_singleMu_Run2018D_v3/200503_121426/0001",
-            "root://cmseos.fnal.gov//store/group/lpcmetx/iDM/Ntuples/2018/backgrounds_twelthrun/SingleMuon/crab_iDMAnalysis_singleMu_Run2018D_v3/200503_121426/0002"
+            "root://cmseos.fnal.gov//store/group/lpcmetx/iDM/Ntuples/2018/data_twelthrun/SingleMuon/crab_iDMAnalysis_singleMu_Run2018D/200507_223357/0000",
+            "root://cmseos.fnal.gov//store/group/lpcmetx/iDM/Ntuples/2018/data_twelthrun/SingleMuon/crab_iDMAnalysis_singleMu_Run2018D/200507_223357/0001",
+            "root://cmseos.fnal.gov//store/group/lpcmetx/iDM/Ntuples/2018/data_twelthrun/SingleMuon/crab_iDMAnalysis_singleMu_Run2018D/200507_223357/0002",
+            "root://cmseos.fnal.gov//store/group/lpcmetx/iDM/Ntuples/2018/data_twelthrun/SingleMuon/crab_iDMAnalysis_singleMu_Run2018D/200507_223357/0003",
+            "root://cmseos.fnal.gov//store/group/lpcmetx/iDM/Ntuples/2018/data_twelthrun/SingleMuon/crab_iDMAnalysis_singleMu_Run2018D/200507_223357/0004",
+            "root://cmseos.fnal.gov//store/group/lpcmetx/iDM/Ntuples/2018/data_twelthrun/SingleMuon/crab_iDMAnalysis_singleMu_Run2018D/200507_223357/0005",
+            "root://cmseos.fnal.gov//store/group/lpcmetx/iDM/Ntuples/2018/data_twelthrun/SingleMuon/crab_iDMAnalysis_singleMu_Run2018D/200507_223357/0006"
         ],
         "group": "data",
         "mode": "DATA",

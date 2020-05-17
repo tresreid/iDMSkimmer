@@ -5,7 +5,7 @@
             "plots": [
                 {
                     "quantity": "reco_PF_MET_pt",
-                    "groups_to_exclude": [],
+                    "groups_to_exclude": ["ZJets"],
                     "type": "float1D",
                     "name": "reco_PF_MET_pt",
                     "title": "MET pT [GeV]",
@@ -16,7 +16,7 @@
                 },
                 {
                     "quantity": "reco_PF_MetNoMu_pt",
-                    "groups_to_exclude": [],
+                    "groups_to_exclude": ["ZJets"],
                     "type": "float1D",
                     "name": "reco_PF_MetNoMu_pt",
                     "title": "MetNoMu pT [GeV]",
@@ -27,7 +27,7 @@
                 },
                 {
                     "quantity": "reco_PF_recoil_pt",
-                    "groups_to_exclude": [],
+                    "groups_to_exclude": ["ZJets"],
                     "type": "float1D",
                     "name": "reco_PF_recoil_pt",
                     "title": "Recoil pT [GeV]",
