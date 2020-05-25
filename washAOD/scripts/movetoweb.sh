@@ -9,11 +9,11 @@ do
 done
 #cp -r $dir/macros/plots/* /publicweb/m/mreid/iDM_AN_Plots/moresamples/
 
-#webdir=/publicweb/m/mreid/iDM_AN_Plots/an_plots/trig_mubins/
+webdir=/publicweb/m/mreid/iDM_AN_Plots/an_plots/trig_mubins/
 #webdir=/publicweb/m/mreid/iDM_AN_Plots/an_plots/trig/
 #webdir=/publicweb/m/mreid/iDM_AN_Plots/an_plots/final_trigs_erf/
 #webdir=/publicweb/m/mreid/iDM_AN_Plots/an_plots/final_trigs_tanh/
-webdir=/publicweb/m/mreid/iDM_AN_Plots/an_plots/signal_trig/
+#webdir=/publicweb/m/mreid/iDM_AN_Plots/an_plots/signal_trig/
 
 mkdir -p ${webdir} 
 rm -r ${webdir}*

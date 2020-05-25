@@ -96,7 +96,7 @@
     },
     "QCD_HT700to1000_2018": {
         "dir": [
-            "root://cmseos.fnal.gov//store/group/lpcmetx/iDM/Ntuples/2018/backgrounds_twelthrun/QCD_HT700to1000_TuneCP5_13TeV-madgraphMLM-pythia8/crab_iDMAnalysis_QCD_HT700to1000_2018/200427_165040/0000/merged"
+            "root://cmseos.fnal.gov//store/group/lpcmetx/iDM/Ntuples/2018/backgrounds_twelthrun/QCD_HT700to1000_TuneCP5_13TeV-madgraphMLM-pythia8/crab_iDMAnalysis_QCD_HT700to1000_2018/200427_165040/0000"
         ],
         "group": "QCD",
         "limit_num_files": -1,
@@ -107,7 +107,7 @@
     },
     "ST_s-channel_2018": {
         "dir": [
-            "root://cmseos.fnal.gov//store/group/lpcmetx/iDM/Ntuples/2018/backgrounds_twelthrun/ST_s-channel_4f_leptonDecays_TuneCP5_13TeV-madgraph-pythia8/crab_iDMAnalysis_ST_s-channel_2018/200427_165656/0000"
+            "root://cmseos.fnal.gov//store/group/lpcmetx/iDM/Ntuples/2018/backgrounds_twelthrun/ST_s-channel_4f_leptonDecays_TuneCP5_13TeV-madgraph-pythia8/crab_iDMAnalysis_ST_s-channel_2018/200427_165656/0000/merged"
         ],
         "group": "Top",
         "limit_num_files": -1,
@@ -118,7 +118,7 @@
     },
     "ST_t-channel_antitop_5f_2018_v2": {
         "dir": [
-            "root://cmseos.fnal.gov//store/group/lpcmetx/iDM/Ntuples/2018/backgrounds_twelthrun/ST_t-channel_antitop_5f_TuneCP5_13TeV-powheg-pythia8/crab_iDMAnalysis_ST_t-channel_antitop_5f_2018_v2/200429_175434/0000"
+            "root://cmseos.fnal.gov//store/group/lpcmetx/iDM/Ntuples/2018/backgrounds_twelthrun/ST_t-channel_antitop_5f_TuneCP5_13TeV-powheg-pythia8/crab_iDMAnalysis_ST_t-channel_antitop_5f_2018_v2/200429_175434/0000/merged"
         ],
         "group": "Top",
         "limit_num_files": -1,
@@ -129,7 +129,7 @@
     },
     "ST_t-channel_top_5f_2018_v2": {
         "dir": [
-            "root://cmseos.fnal.gov//store/group/lpcmetx/iDM/Ntuples/2018/backgrounds_twelthrun/ST_t-channel_top_5f_TuneCP5_13TeV-powheg-pythia8/crab_iDMAnalysis_ST_t-channel_top_5f_2018_v2/200429_180203/0000"
+            "root://cmseos.fnal.gov//store/group/lpcmetx/iDM/Ntuples/2018/backgrounds_twelthrun/ST_t-channel_top_5f_TuneCP5_13TeV-powheg-pythia8/crab_iDMAnalysis_ST_t-channel_top_5f_2018_v2/200429_180203/0000/merged"
         ],
         "group": "Top",
         "limit_num_files": -1,
@@ -140,7 +140,7 @@
     },
     "ST_tW_antitop_2018": {
         "dir": [
-            "root://cmseos.fnal.gov//store/group/lpcmetx/iDM/Ntuples/2018/backgrounds_twelthrun/ST_tW_antitop_5f_inclusiveDecays_TuneCP5_13TeV-powheg-pythia8/crab_iDMAnalysis_ST_tW_antitop_2018/200427_165331/0000"
+            "root://cmseos.fnal.gov//store/group/lpcmetx/iDM/Ntuples/2018/backgrounds_twelthrun/ST_tW_antitop_5f_inclusiveDecays_TuneCP5_13TeV-powheg-pythia8/crab_iDMAnalysis_ST_tW_antitop_2018/200427_165331/0000/merged"
         ],
         "group": "Top",
         "limit_num_files": -1,
@@ -151,8 +151,8 @@
     },
     "ST_tW_top_2018_v2": {
         "dir": [
-            "root://cmseos.fnal.gov//store/group/lpcmetx/iDM/Ntuples/2018/backgrounds_twelthrun/ST_tW_top_5f_inclusiveDecays_TuneCP5_13TeV-powheg-pythia8/crab_iDMAnalysis_ST_tW_top_2018_v2/200429_175253/0000",
-            "root://cmseos.fnal.gov//store/group/lpcmetx/iDM/Ntuples/2018/backgrounds_twelthrun/ST_tW_top_5f_inclusiveDecays_TuneCP5_13TeV-powheg-pythia8/crab_iDMAnalysis_ST_tW_top_2018_v2/200429_175253/0001"
+            "root://cmseos.fnal.gov//store/group/lpcmetx/iDM/Ntuples/2018/backgrounds_twelthrun/ST_tW_top_5f_inclusiveDecays_TuneCP5_13TeV-powheg-pythia8/crab_iDMAnalysis_ST_tW_top_2018_v2/200429_175253/0000/merged",
+            "root://cmseos.fnal.gov//store/group/lpcmetx/iDM/Ntuples/2018/backgrounds_twelthrun/ST_tW_top_5f_inclusiveDecays_TuneCP5_13TeV-powheg-pythia8/crab_iDMAnalysis_ST_tW_top_2018_v2/200429_175253/0001/merged"
         ],
         "group": "Top",
         "limit_num_files": -1,
@@ -163,7 +163,7 @@
     },
     "TTJets_NLO_2018": {
         "dir": [
-            "root://cmseos.fnal.gov//store/group/lpcmetx/iDM/Ntuples/2018/backgrounds_twelthrun/TTJets_TuneCP5_13TeV-amcatnloFXFX-pythia8/crab_iDMAnalysis_TTJets_NLO_2018/200427_165923/0000"
+            "root://cmseos.fnal.gov//store/group/lpcmetx/iDM/Ntuples/2018/backgrounds_twelthrun/TTJets_TuneCP5_13TeV-amcatnloFXFX-pythia8/crab_iDMAnalysis_TTJets_NLO_2018/200427_165923/0000/merged"
         ],
         "group": "Top",
         "limit_num_files": -1,
