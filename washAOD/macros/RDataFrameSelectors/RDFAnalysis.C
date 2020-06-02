@@ -254,12 +254,12 @@ Bool_t RDFAnalysis::Process(TChain * chain) {
     };
 
     auto calcTrigsf = [&](float met) {
-        return 1.0f;
-        //if (met < 120.0)
-        //    return 0.3f;
-        //if (met > 800.0)
-        //    return 1.0f;
-        //return (float)trig_sf->GetBinContent(trig_sf->FindBin(met));
+        //return 1.0f;
+        if (met < 120.0)
+            return 0.3f;
+        if (met > 800.0)
+            return 1.0f;
+        return (float)trig_sf->GetBinContent(trig_sf->FindBin(met));
     };
 
     auto calcPUsf = [&](int pileup) { 
@@ -530,7 +530,8 @@ Bool_t RDFAnalysis::Process(TChain * chain) {
             Define("Twgt", calcTsf, {"gen_ID", "gen_pt"}).
             Define("PUwgt", calcPUsf, {"gen_pu_true"}).
             Define("trig_wgt", calcTrigsf, {"reco_PF_MetNoMu_pt"}).
-            Define("wgt", calcTotalWgt, {"Zwgt", "Wwgt", "Twgt", "PUwgt", "trig_wgt", "gen_wgt"});
+            Define("wgt", "1.0");
+            //Define("wgt", calcTotalWgt, {"Zwgt", "Wwgt", "Twgt", "PUwgt", "trig_wgt", "gen_wgt"});
     }
 
 
