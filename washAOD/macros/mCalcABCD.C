@@ -36,8 +36,8 @@ namespace macro {
                     cout << "Integral with over+underflow: " << h->Integral(0, h->GetNbinsX()+1, 0, h->GetNbinsY()+1) << endl;
                     int lowXBin = h->GetXaxis()->FindBin(lowX), highXBin = h->GetXaxis()->FindBin(highX);
                     int lowYBin = h->GetYaxis()->FindBin(lowY), highYBin = h->GetYaxis()->FindBin(highY);
-                    cout << "Low X bin: " << lowXBin << ", high X bin: " << highXBin << endl;
-                    cout << "Low Y bin: " << lowYBin << ", high Y bin: " << highYBin << endl;
+                    cout << "Low X bin: " << lowXBin << ", high X bin: " << highXBin << ", Low X: "<< lowX<<", High X: "<<highX<< endl;
+                    cout << "Low Y bin: " << lowYBin << ", high Y bin: " << highYBin << ", Low Y: "<< lowY<<", High Y: "<<highY<< endl;
                     //if (lowXBin == 0) lowXBin = 1;
                     //if (lowYBin == 0) lowYBin = 1;
                     //if (highXBin == h->GetNbinsX()) highXBin--;

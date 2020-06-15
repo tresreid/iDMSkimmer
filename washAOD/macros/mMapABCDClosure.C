@@ -52,6 +52,16 @@ namespace macro {
                             float C_pred_syst_err = C_pred * sqrt(1/A + 1/B + 1/D);
                             float C_pred_stat_err = sqrt(C_pred);
                             float DeltaC = abs(C - C_pred)/C;
+                            cout << "Low X bin: " << 0 << " high X bin: " << i << " High X: " << h->GetXaxis()->GetBinLowEdge(i)<< endl;
+                            cout << "Low Y bin: " << 0 << " high Y bin: " << j << " High Y: " << h->GetYaxis()->GetBinLowEdge(j)<<endl;
+                            cout << "A: " << A << " +/- " << sqrt(A) << endl;
+                            cout << "B: " << B << " +/- " << sqrt(B) << endl;
+                            cout << "C: " << C << " +/- " << sqrt(C) << endl;
+                            cout << "D: " << D << " +/- " << sqrt(D) << endl;
+                            cout << "A*D/B: " << C_pred << " +/- "
+                                <<  C_pred_stat_err << " (stat.) +/- " << C_pred_syst_err << " (syst.)" << endl;
+                            cout << "C: " << C << " +/- " << sqrt(C) << endl;
+                            cout << endl;
                             if (C_pred_syst_err < 0.5*C_pred) {
                                 h_map->SetBinContent(i, j, DeltaC);
                                 avg_closure += DeltaC;
