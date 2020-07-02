@@ -58,7 +58,7 @@
         "book_plot": "no"
     },
     {
-        "cut": "All(MET_jet_dphi > 0.5)",
+        "cut": "All(MET_jet_dphi > 0.5) && good_eta",
         "description": "|#Delta#Phi(MET, all jets)| > 0.5",
         "book_plot": "no"
     },
@@ -120,19 +120,23 @@
     },
     {
         "cut": "abs(matched_muon_vtx_dR) < 1.5",
-        "description": "dR(muons) < 1.5"
+        "description": "dR(muons) < 1.5",
+        "book_plot": "no"
     },
     {
         "cut": "reco_sel_mu_q0 != reco_sel_mu_q1",
-        "description": "muons: OSSF"
+        "description": "muons: OSSF",
+        "book_plot": "no"
     },
     {
         "cut": "abs(reco_sel_mu_dxy0) > 0.1", 
-        "description": "Selected muon 0 dxy > 0.1 cm"
+        "description": "Selected muon 0 dxy > 0.1 cm",
+        "book_plot": "no"
     },
     {
         "cut": "abs(reco_sel_mu_dxy1) > 0.1", 
-        "description": "Selected muon 1 dxy > 0.1 cm"
+        "description": "Selected muon 1 dxy > 0.1 cm",
+        "book_plot": "no"
     },
     {
         "cut": "n_matched == 0",

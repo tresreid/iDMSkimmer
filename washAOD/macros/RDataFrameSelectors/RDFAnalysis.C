@@ -368,6 +368,14 @@ Bool_t RDFAnalysis::Process(TChain * chain) {
     auto goodQuantity = [&](RVec<float> quantity, RVec<bool> pass){
       return quantity[pass];
     };
+    auto takegoodeta = [&](RVec<float> quantity, RVec<float> q2){
+      bool good = true;
+      for (size_t i=0; i < quantity.size() ; i++){
+      if (q2[i] < 30) {continue;}
+      if (abs(quantity[i]) > 2.4) { good=false;}
+      }
+      return good;
+    };
 
     // for each dsa muon in best vtx, look for *best* gm match in dr
     auto findMuonMatch0 = [&](RVec<int> dsagm_match, RVec<float> dsagm_dR, RVec<bool> vtx_pass_dsagm, size_t dsa_index_0, size_t dsa_index_1) {
@@ -505,6 +513,7 @@ Bool_t RDFAnalysis::Process(TChain * chain) {
         Define("reco_PF_jet_pt1", takeQuantity1, {jet_pt.Data()}).
         Define("reco_PF_jet_eta0", takeQuantity0, {jet_eta.Data()}).
         Define("reco_PF_jet_eta1", takeQuantity1, {jet_eta.Data()}).
+        Define("good_eta", takegoodeta, {jet_eta.Data(),jet_pt.Data()}).
         Define("reco_PF_jet_phi0", takeQuantity0, {jet_phi.Data()}).
         Define("reco_PF_jet_phi1", takeQuantity1, {jet_phi.Data()}).
         Define("reco_dsa0_trk_chi2", takeQuantity0, {"reco_dsa_trk_chi2"}).

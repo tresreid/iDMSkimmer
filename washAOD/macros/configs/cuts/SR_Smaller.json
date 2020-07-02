@@ -44,7 +44,7 @@
         "description": "Photon veto"
     },
     {
-        "cut": "MET_jet_dphi0 > 1.5;",
+        "cut": "((MET_jet_dphi0 > 1.5) )",
         "description": "|#Delta#Phi(MET, leading jet)| > 1.5"
     },
     {

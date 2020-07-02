@@ -66,7 +66,8 @@ globaltag = ''
 if options.year == 2016:
     globaltag = '80X_dataRun2_2016SeptRepro_v7' if options.data else '80X_mcRun2_asymptotic_2016_TrancheIV_v8'
 elif options.year == 2017:
-    globaltag = '94X_dataRun2_v11' if options.data else '94X_mc2017_realistic_v17'
+    globaltag = '94X_dataRun2_v11' if options.data else '102X_mc2017_realistic_v6'
+    #globaltag = '94X_dataRun2_v11' if options.data else '94X_mc2017_realistic_v17'
 elif options.year == 2018:
     # Check if it's 2018 D data
     if options.data and options.Run2018D:

@@ -1,0 +1,34 @@
+[
+    {
+        "name": "mMainAnalysis",
+        "config": {
+            "jet_systematic": "JESUp",
+            "plots": [
+                {
+                    "quantity": "reco_PF_n_highPt_jets",
+                    "groups_to_exclude": [],
+                    "type": "int1D",
+                    "name": "reco_PF_n_highPt_jets",
+                    "title": "Number of jets with pT > 30 GeV",
+                    "nbinsX": 10,
+                    "lowX": 0,
+                    "highX": 10
+                },
+                {
+                    "name": "reco_METmu_dphi_vs_matched_muon_vtx_sign",
+                    "title": "|#Delta#Phi(MET, muons)| vs Muon pair vertex significance",
+                    "groups_to_exclude": [],
+                    "type": "float2D",
+                    "quantity": "reco_METmu_dphi_v2",
+                    "nbinsX": 32,
+                    "lowX": 0,
+                    "highX": 3.2,
+                    "quantity2": "matched_muon_vtx_sign",
+                    "nbinsY": 60,
+                    "lowY": 0,
+                    "highY": 600 
+                }
+            ]
+        }
+    }
+]

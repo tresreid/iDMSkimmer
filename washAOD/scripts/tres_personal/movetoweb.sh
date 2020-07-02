@@ -11,7 +11,9 @@ done
 
 #webdir=/publicweb/m/mreid/iDM_AN_Plots/an_plots/trig_mubins/
 #webdir=/publicweb/m/mreid/iDM_AN_Plots/an_plots/jet_systematics/
+#webdir=/publicweb/m/mreid/iDM_AN_Plots/an_plots/closure/
 webdir=/publicweb/m/mreid/iDM_AN_Plots/an_plots/closure/
+#webdir=/publicweb/m/mreid/iDM_AN_Plots/an_plots/jetsys4/
 #webdir=/publicweb/m/mreid/iDM_AN_Plots/an_plots/trig/
 #webdir=/publicweb/m/mreid/iDM_AN_Plots/an_plots/final_trigs_erf/
 #webdir=/publicweb/m/mreid/iDM_AN_Plots/an_plots/final_trigs_tanh/
